@@ -1,4 +1,4 @@
-module github.com/webrpc/webrpc
+module github.com/kipply/webrpc
 
 go 1.13
 
