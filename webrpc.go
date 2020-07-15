@@ -5,9 +5,9 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/kipply/webrpc/schema"
+	"github.com/kipply/webrpc/schema/ridl"
 	"github.com/pkg/errors"
-	"github.com/webrpc/webrpc/schema"
-	"github.com/webrpc/webrpc/schema/ridl"
 )
 
 const VERSION = "v0.5.0"

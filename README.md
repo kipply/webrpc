@@ -1,4 +1,4 @@
-<img alt="webrpc" src="https://github.com/webrpc/webrpc/raw/master/webrpc.png" width="1024" />
+<img alt="webrpc" src="https://github.com/kipply/webrpc/raw/master/webrpc.png" width="1024" />
 
 webrpc is a design/schema-driven approach to writing backend servers for the Web. Write your server's
 api interface in a schema format of [RIDL](./_examples/golang-basics/example.ridl) or [JSON](./_examples/golang-basics/example.webrpc.json),
@@ -137,7 +137,7 @@ Future goals/work:
 
 ## Getting started
 
-1. `go get -u github.com/webrpc/webrpc/cmd/webrpc-gen`
+1. `go get -u github.com/kipply/webrpc/cmd/webrpc-gen`
 2. Write+design a [webrpc schema file](./_examples/golang-basics/example.ridl) for your Web service
 3. Run the code-generator to create your server interface and client, ie.
   * `webrpc-gen -schema=example.ridl -target=go -pkg=service -server -client -out=./service/proto.gen.go`
@@ -174,7 +174,7 @@ For more information please see the [schema readme](./schema/README.md).
 ### Dev
 
 1. Install Go 1.11+
-2. $ `go get -u github.com/webrpc/webrpc/...`
+2. $ `go get -u github.com/kipply/webrpc/...`
 3. $ `make tools`
 4. $ `make build`
 5. $ `make test`
@@ -194,7 +194,7 @@ Some tips..
 
 * [Peter Kieltyka](https://github.com/pkieltyka)
 * [José Carlos Nieto](https://github.com/xiam)
-* ..and full list of [contributors](https://github.com/webrpc/webrpc/graphs/contributors)!
+* ..and full list of [contributors](https://github.com/kipply/webrpc/graphs/contributors)!
 
 ## Credits
 

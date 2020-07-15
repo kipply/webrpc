@@ -8,9 +8,9 @@ import (
 	"text/template"
 
 	"github.com/goware/statik/fs"
-	"github.com/webrpc/webrpc/gen"
-	"github.com/webrpc/webrpc/gen/javascript/embed"
-	"github.com/webrpc/webrpc/schema"
+	"github.com/kipply/webrpc/gen"
+	"github.com/kipply/webrpc/gen/javascript/embed"
+	"github.com/kipply/webrpc/schema"
 )
 
 func init() {

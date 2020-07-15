@@ -8,10 +8,10 @@ import (
 	"text/template"
 
 	"github.com/goware/statik/fs"
+	"github.com/kipply/webrpc/gen"
+	"github.com/kipply/webrpc/gen/golang/embed"
+	"github.com/kipply/webrpc/schema"
 	"github.com/pkg/errors"
-	"github.com/webrpc/webrpc/gen"
-	"github.com/webrpc/webrpc/gen/golang/embed"
-	"github.com/webrpc/webrpc/schema"
 )
 
 func init() {
@@ -28,7 +28,7 @@ func (g *generator) Gen(proto *schema.WebRPCSchema, opts gen.TargetOptions) (str
 		return "", err
 	}
 
-	// TODO: we can move a bunch of this code to the core gen package at githb.com/webrpc/webrpc/gen
+	// TODO: we can move a bunch of this code to the core gen package at githb.com/kipply/webrpc/gen
 	// .. then typescript gen, and others can use it too..
 
 	// Load templates

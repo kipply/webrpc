@@ -1,12 +1,12 @@
 package golang
 
 import (
-	"log"
-	"testing"
+  "log"
+  "testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/webrpc/webrpc/gen"
-	"github.com/webrpc/webrpc/schema"
+  "github.com/kipply/webrpc/gen"
+  "github.com/kipply/webrpc/schema"
+  "github.com/stretchr/testify/assert"
 )
 
 const input = `
@@ -170,14 +170,14 @@ const input = `
 `
 
 func TestGenTypescript(t *testing.T) {
-	g := &generator{}
+  g := &generator{}
 
-	s, err := schema.ParseSchemaJSON([]byte(input))
-	assert.NoError(t, err)
+  s, err := schema.ParseSchemaJSON([]byte(input))
+  assert.NoError(t, err)
 
-	o, err := g.Gen(s, gen.TargetOptions{PkgName: "test", Client: true, Server: true})
-	assert.NoError(t, err)
-	_ = o
+  o, err := g.Gen(s, gen.TargetOptions{PkgName: "test", Client: true, Server: true})
+  assert.NoError(t, err)
+  _ = o
 
-	log.Printf("o: %v", o)
+  log.Printf("o: %v", o)
 }

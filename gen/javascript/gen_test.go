@@ -1,11 +1,11 @@
 package javascript
 
 import (
-	"testing"
+  "testing"
 
-	"github.com/stretchr/testify/assert"
-	"github.com/webrpc/webrpc/gen"
-	"github.com/webrpc/webrpc/schema"
+  "github.com/kipply/webrpc/gen"
+  "github.com/kipply/webrpc/schema"
+  "github.com/stretchr/testify/assert"
 )
 
 const input = `
@@ -160,14 +160,14 @@ const input = `
 `
 
 func TestGenJavascript(t *testing.T) {
-	s, err := schema.ParseSchemaJSON([]byte(input))
-	assert.NoError(t, err)
+  s, err := schema.ParseSchemaJSON([]byte(input))
+  assert.NoError(t, err)
 
-	g := &generator{}
+  g := &generator{}
 
-	o, err := g.Gen(s, gen.TargetOptions{})
-	assert.NoError(t, err)
-	_ = o
+  o, err := g.Gen(s, gen.TargetOptions{})
+  assert.NoError(t, err)
+  _ = o
 
-	// t.Logf("%s", o)
+  // t.Logf("%s", o)
 }

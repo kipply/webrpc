@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strconv"
 
-	"github.com/webrpc/webrpc/schema"
+	"github.com/kipply/webrpc/schema"
 )
 
 var (

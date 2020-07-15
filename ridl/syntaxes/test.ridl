@@ -1,0 +1,314 @@
+webrpc = v1             # version of webrpc schema format (ridl or json)
+
+name = data               # name if your backend app
+version = v0.0.1        # version of your schema
+
+enum JobStatus: uint32
+  - UNKNOWN
+  - NEW
+  - INITIALIZING
+  - INITIALIZED
+  - RUNNING
+  - SUCCESS
+  - ERROR
+  - DELETED
+
+enum JobType: uint32
+  - unknown
+  - freq
+  - pushshift
+  - scrape
+  - vocab
+  - seek
+  - encode
+  - badwords
+  - metamerge
+  - custom
+  - upsert
+  - search
+  - sanatize
+
+enum WebpageField: uint32
+  - unknown
+  - url
+  - content
+  - html
+
+
+enum PipelineStatus: uint32
+  - IN_PROGRESS
+  - COMPLETED
+  - ERROR
+
+message ComputeSpec
+  - image: string
+    + json = image,omitempty
+    + go.tag.yaml = image,omitempty
+
+  - command: []string
+    + json = command,omitempty
+    + go.tag.yaml = command,omitempty
+
+  - CPU: string
+    + json = cpu,omitempty
+    + go.tag.yaml = cpu,omitempty
+
+  - mem: string
+    + json = mem,omitempty
+    + go.tag.yaml = mem,omitempty
+
+  - GPU: string
+    + json = gpu,omitempty
+    + go.tag.yaml = gpu,omitempty
+
+  - TPU: string
+    + json = tpu,omitempty
+    + go.tag.yaml = tpu,omitempty
+
+  - storage: string
+    + json = storage,omitempty
+    + go.tag.yaml = storage,omitempty
+
+  - replicas: int32
+    + json = replicas,omitempty
+    + go.tag.yaml = replicas,omitempty
+
+message Job
+  - ID: int64
+    + json = id,omitempty
+    + go.tag.yaml = -,omitempty
+    + go.tag.db = id,omitempty,pk
+
+  - name: string
+    + go.tag.yaml = name,omitempty
+    + json = name,omitempty
+    + go.tag.db = name
+
+  - input: string
+    + go.tag.yaml = input,omitempty
+    + json = input,omitempty
+    + go.tag.db = input
+
+  - output: string
+    + go.tag.yaml = output,omitempty
+    + json = output,omitempty
+    + go.tag.db = output
+
+  - outputDir: string
+    + go.tag.yaml = output_dir,omitempty
+    + json = output_dir,omitempty
+    + go.tag.db = output_dir
+
+  - type: JobType
+    + go.tag.yaml = type,omitempty
+    + json = type,omitempty
+    + go.tag.db = type
+    + go.field.type = JobType
+
+  - status: JobStatus
+    + go.tag.yaml = -
+    + json = status
+    + go.tag.db = status
+    + go.field.type = JobStatus
+
+  - args: map<string, string>
+    + go.tag.yaml = args
+    + json = args,omitempty
+    + go.tag.db = args,omitempty
+
+  - compute: ComputeSpec
+    + go.tag.yaml = compute
+    + json = compute,omitempty
+    + go.tag.db = -,omitempty
+
+  - createdBy: int64
+    + go.tag.yaml = -
+    + json = created_by
+    + go.tag.db = created_by,omitempty
+
+  - createdAt?: timestamp
+    + go.tag.yaml = -
+    + json = created_at,omitempty
+    + go.tag.db = created_at,omitempty
+
+  - updatedAt?: timestamp
+    + go.tag.yaml = -
+    + json = updated_at,omitempty
+    + go.tag.db = updated_at,omitempty
+
+  - cron?: string
+    + go.tag.yaml = cron,omitempty
+    + json = cron,omitempty
+    + go.tag.db = cron,omitempty
+
+  - error?: string
+    + go.tag.yaml = -
+    + json = error,omitempty
+    + go.tag.db = error,omitempty
+
+  - pipelineIdx?: int
+    + go.tag.yaml = -
+    + json = -
+    + go.tag.db = pipeline_idx
+
+  - pipelinePath?: string
+    + go.tag.yaml = -
+    + json = -
+    + go.tag.db = pipeline_path,omitempty
+
+message Webpage
+  - ID: int64
+    + json = id,omitempty
+    + go.tag.yaml = -,omitempty
+    + go.tag.db = id,omitempty,pk
+
+  - title?: string
+    + go.tag.yaml = title,omitempty
+    + json = title,omitempty
+    + go.tag.db = title
+
+  - URL: string
+    + go.tag.yaml = url,omitempty
+    + json = url,omitempty
+    + go.tag.db = url
+
+  - content?: string
+    + go.tag.yaml = content,omitempty
+    + json = content,omitempty
+    + go.tag.db = content,omitempty
+
+  - HTML?: string
+    + go.tag.yaml = html
+    + json = html,omitempty
+    + go.tag.db = html
+
+  - createdAt?: timestamp
+    + go.tag.yaml = -
+    + json = created_at,omitempty
+    + go.tag.db = created_at,omitempty
+
+  - updatedAt?: timestamp
+    + go.tag.yaml = -
+    + json = updated_at,omitempty
+    + go.tag.db = updated_at,omitempty
+
+message Pipeline
+  - name: string
+    + go.tag.yaml = name,omitempty
+    + json = name,omitempty
+
+  - outputDir: string
+    + go.tag.yaml = output_dir,omitempty
+    + json = output_dir,omitempty
+
+  - jobs: []Job
+    + go.tag.yaml = jobs,omitempty
+    + json = jobs,omitempty
+
+  - createdBy: int64
+    + go.tag.yaml = -
+
+  - cron?: string
+    + go.tag.yaml = cron,omitempty
+    + json = cron,omitempty
+
+message PipelineData
+  - name: string
+    + json = name,omitempty
+  - lastUpdated: timestamp
+    + json = lastUpdated,omitempty
+  - status: PipelineStatus
+    + json = status,omitempty
+    + go.field.type = PipelineStatus
+  - progress: string
+    + json = progress,omitempty
+  - createdBy: string
+    + json = createdBy,omitempty
+  - path: string
+    + json = path,omitempty
+  - cronSchedule: string
+    + json = cronSchedule,omitempty
+  - cronLastSchedule: string
+    + json = cronLastSchedule,omitempty
+  - outputDir: string
+    + json = outputDir,omitempty
+
+message User
+  - ID: int64
+    + json = id
+    + go.tag.db = id,omitempty,pk
+
+  - email: string
+    + json = email
+    + go.tag.db = email
+
+  - createdAt?: timestamp
+    + json = created_at,omitempty
+    + go.tag.db = created_at
+
+  - updatedAt?: timestamp
+    + json = updated_at,omitempty
+    + go.tag.db = updated_at
+
+message ModelPodSpec
+  - replicas: int32
+    + json = replicas,omitempty
+    + go.tag.yaml = replicas,omitempty
+  - API: ComputeSpec
+    + go.tag.yaml = api,omitempty
+  - Serving: ComputeSpec
+    + go.tag.yaml = serving,omitempty
+
+message Model
+  - name: string
+    + go.tag.yaml = name,omitempty
+    + json = name,omitempty
+
+  - path: string
+    + go.tag.yaml = path,omitempty
+    + json = path,omitempty
+
+  - requestHandler: string
+    + go.tag.yaml = request_handler,omitempty
+    + json = request_handler,omitempty
+
+  - compute: ModelPodSpec
+    + go.tag.yaml = compute,omitempty
+    + json = compute,omitempty
+
+message Deployment
+  - name: string
+    + go.tag.yaml = name,omitempty
+    + json = name,omitempty
+  - models: []Model
+    + go.tag.yaml = models,omitempty
+    + json = models,omitempty
+
+message WebpagesQuery
+  - before: timestamp
+  - after: timestamp
+  - match: string
+  - limit: int
+  - offset: int
+  - URLS: []string
+
+message PipelineLogs
+  - name: string
+  - logs: string
+
+
+service Operator
+  - Auth(email: string, password: string) => (token: string)
+  - Ping()
+  - UpdateStatus(jobID: int64, status: JobStatus)
+  - Pub(pipeline: Pipeline, idx: int) => (created: Job)
+  - Deploy(deployment: Deployment, projectBytes: []byte, force: bool)
+  - UpsertWebpages(webpages: []Webpage)
+  - GetWebpages(wpq: WebpagesQuery) => (webpage: []Webpage)
+  - GetWebpagesValue(field: WebpageField, wpq: WebpagesQuery) => (urls: []string)
+  - GetWebpagesRandom(num: int64, field: WebpageField, match: string) => (urls: []string)
+  - CountWebpages(wpq: WebpagesQuery) => (count: int64)
+  - DeleteWebpages(urls: []string)
+  - DeletePipeline(name: string)
+  - GetPipelineLogs(pipelineName: string) => (logs: []PipelineLogs)
+  - ListPipelines(email: string) => (pipelines: []PipelineData)

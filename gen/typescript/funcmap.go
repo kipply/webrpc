@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/webrpc/webrpc/schema"
+	"github.com/kipply/webrpc/schema"
 )
 
 var fieldTypeMap = map[schema.DataType]string{

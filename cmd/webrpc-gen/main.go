@@ -7,11 +7,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/webrpc/webrpc"
-	"github.com/webrpc/webrpc/gen"
-	_ "github.com/webrpc/webrpc/gen/golang"
-	_ "github.com/webrpc/webrpc/gen/javascript"
-	_ "github.com/webrpc/webrpc/gen/typescript"
+	"github.com/kipply/webrpc"
+	"github.com/kipply/webrpc/gen"
+	_ "github.com/kipply/webrpc/gen/golang"
+	_ "github.com/kipply/webrpc/gen/javascript"
+	_ "github.com/kipply/webrpc/gen/typescript"
 )
 
 var flags = flag.NewFlagSet("webrpc-gen", flag.ExitOnError)

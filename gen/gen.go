@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"github.com/webrpc/webrpc/schema"
+	"github.com/kipply/webrpc/schema"
 )
 
 type Generator interface {
